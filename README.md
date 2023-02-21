@@ -1,6 +1,6 @@
 ## About CRM
 
-CRM was built to manage my own client relations.  So many systems out there don't do what I want and/or are super expensive.  This was never intended to be used by anyone but myself.  However, it is open sourced if you choose to do so.  Please note that I will not support any issues on custom installations.
+CRM was built to manage my own client relations.  So many systems out there don't do what I want and/or are super expensive.  So I made this in a couple of days.  This was never intended to be used by anyone but myself.  However, it is open sourced as I felt people could benefit from it.  I will not be answering questions or supporting it due to this.  You are on your own.  Use at your own risk.
 
 ## Requirements
 
