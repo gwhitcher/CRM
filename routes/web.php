@@ -28,7 +28,6 @@ Route::any('/companies/links/add', [App\Http\Controllers\CompanyLinksController:
 Route::any('/companies/links/edit/{id}', [App\Http\Controllers\CompanyLinksController::class, 'edit'])->name('company-links-edit');
 Route::any('/companies/links/delete/{id}', [App\Http\Controllers\CompanyLinksController::class, 'delete'])->name('company-links-delete');
 
-
 Route::get('/company/{id}', [App\Http\Controllers\CompaniesController::class, 'view'])->name('company-view');
 
 Route::get('/invoices', [App\Http\Controllers\InvoicesController::class, 'index'])->name('invoices');
@@ -38,4 +37,12 @@ Route::any('/invoices/delete/{id}', [App\Http\Controllers\InvoicesController::cl
 Route::any('/invoices/print/{id}', [App\Http\Controllers\InvoicesController::class, 'print'])->name('invoice-print');
 Route::get('/invoices/{id}', [App\Http\Controllers\InvoicesController::class, 'view'])->name('invoice-view');
 
+Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');
+Route::any('/users/add', [App\Http\Controllers\UsersController::class, 'add'])->name('users-add');
+Route::any('/users/edit/{id}', [App\Http\Controllers\UsersController::class, 'edit'])->name('users-edit');
+Route::any('/users/delete/{id}', [App\Http\Controllers\UsersController::class, 'delete'])->name('users-delete');
+
 Auth::routes();
+Route::get('/register', function () {
+    return redirect('/');
+});

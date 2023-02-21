@@ -48,6 +48,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('invoices') }}">Invoices</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users') }}">Users</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

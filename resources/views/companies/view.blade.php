@@ -121,6 +121,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Title</th>
+                                                <th>Updated</th>
                                                 <th>View</th>
                                             </tr>
                                             </thead>
@@ -129,6 +130,7 @@
                                             <tr>
                                                 <td>{{ $note->id }}</td>
                                                 <td>{{ $note->title }}</td>
+                                                <td>{{ $note->updated_at }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-dark text-white ts-9" data-bs-toggle="modal" data-bs-target="#noteModal{{ $note->id }}">
                                                         View
