@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,11 @@ Route::any('/users/delete/{id}', [App\Http\Controllers\UsersController::class, '
 Auth::routes();
 Route::get('/register', function () {
     return redirect('/');
+});
+Route::get('/', function () {
+    if(Auth::id()) {
+        return redirect('/home');
+    } else {
+        return redirect('/login');
+    }
 });

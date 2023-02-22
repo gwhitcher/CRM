@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use App\Models\CompanyLink;
-use App\Models\CompanyMeta;
 use App\Models\CompanyNote;
-use App\Models\Invoice;
 use Illuminate\Http\Request;
 
 class CompanyNotesController extends Controller

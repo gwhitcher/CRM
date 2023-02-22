@@ -7,7 +7,6 @@ use App\Models\CompanyMeta;
 use App\Models\Invoice;
 use App\Models\InvoiceLineItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class InvoicesController extends Controller
 {

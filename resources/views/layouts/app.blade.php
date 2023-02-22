@@ -42,6 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav m-auto">
+                        @auth
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('companies') }}">Companies</a>
                         </li>
@@ -51,6 +52,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('users') }}">Users</a>
                         </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

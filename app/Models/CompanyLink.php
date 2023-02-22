@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CompanyLink extends Model
 {
-    use HasFactory;
 
     public function getAll() {
         return DB::table('company_links')->orderBy('id','desc')->get();

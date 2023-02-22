@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class Users extends Model
 {
-    use HasFactory;
-
     public function getAll() {
         return DB::table('users')->orderBy('id','asc')->get();
     }

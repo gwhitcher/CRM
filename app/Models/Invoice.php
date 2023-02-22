@@ -3,14 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Invoice extends Model
 {
-    use HasFactory;
-
     public function getAll() {
         return DB::table('invoices')->orderBy('id','desc')->get();
     }
@@ -21,6 +18,14 @@ class Invoice extends Model
 
     public function getInvoicesByCompanyID($id) {
         return DB::table('invoices')->where('company_id','=', $id)->get();
+    }
+
+    public static function getInvoicesPastDue() {
+        $date = now()->toDateString();
+        return DB::table('invoices')
+            ->where('due_date','<=', $date)
+            ->orderBy('due_date','asc')
+            ->get();
     }
 
     public static function add(Request $request) {

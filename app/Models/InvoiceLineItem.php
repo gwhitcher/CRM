@@ -2,15 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class InvoiceLineItem extends Model
 {
-    use HasFactory;
-
     public function getAll() {
         return DB::table('invoice_line_items')->orderBy('title','asc')->get();
     }

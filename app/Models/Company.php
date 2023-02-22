@@ -3,21 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class Company extends Model
 {
-    use HasFactory;
-
     public function getAll() {
         return DB::table('companies')->orderBy('title','asc')->get();
     }
 
     public function view($id) {
         return DB::table('companies')->where('id','=', $id)->first();
+    }
+
+    public static function getLatest($limit = 5) {
+        return DB::table('companies')
+            ->orderBy('id','desc')
+            ->limit($limit)
+            ->get();
     }
 
     public function add(Request $request) {

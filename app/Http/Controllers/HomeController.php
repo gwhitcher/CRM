@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Company;
+use App\Models\Invoice;
 
 class HomeController extends Controller
 {
@@ -23,11 +24,12 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('home');
-    }
-
-    public function welcome()
-    {
-        return view('welcome');
+        $latestCompanies = Company::getLatest();
+        $pastDueInvoices = Invoice::getInvoicesPastDue();
+        return view('home')
+            ->with([
+                'latestCompanies' => $latestCompanies,
+                'pastDueInvoices' => $pastDueInvoices
+            ]);
     }
 }
