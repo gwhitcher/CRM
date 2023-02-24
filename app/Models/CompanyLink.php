@@ -9,19 +9,19 @@ use Illuminate\Support\Facades\DB;
 class CompanyLink extends Model
 {
 
-    public function getAll() {
+    public static function getAll() {
         return DB::table('company_links')->orderBy('id','desc')->get();
     }
 
-    public function view($id) {
+    public static function view($id) {
         return DB::table('company_links')->where('id','=', $id)->first();
     }
 
-    public function getLinksByCompanyID($id) {
+    public static function getLinksByCompanyID($id) {
         return DB::table('company_links')->where('company_id','=', $id)->get();
     }
 
-    public function add(Request $request) {
+    public static function add(Request $request) {
         $company_id = $request->input('company_id');
         $title = $request->input('title');
         $content = $request->input('content');
@@ -36,7 +36,7 @@ class CompanyLink extends Model
             ]);
     }
 
-    public function edit($id, Request $request) {
+    public static function edit($id, Request $request) {
         $company_id = $request->input('company_id');
         $title = $request->input('title');
         $content = $request->input('content');
@@ -51,7 +51,7 @@ class CompanyLink extends Model
             ]);
     }
 
-    public function remove($id) {
+    public static function remove($id) {
         return DB::table('company_links')
             ->where('id', $id)
             ->delete();

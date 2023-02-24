@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class Company extends Model
 {
-    public function getAll() {
+    public static function getAll() {
         return DB::table('companies')->orderBy('title','asc')->get();
     }
 
-    public function view($id) {
+    public static function view($id) {
         return DB::table('companies')->where('id','=', $id)->first();
     }
 
@@ -23,7 +23,7 @@ class Company extends Model
             ->get();
     }
 
-    public function add(Request $request) {
+    public static function add(Request $request) {
         $title = $request->input('title');
         $content = $request->input('content');
         $first_name = $request->input('first_name');
@@ -51,7 +51,7 @@ class Company extends Model
         return DB::table('company_meta')->insert(['company_id' => $id, 'meta_key' => 'postcode', 'meta_value' => $postcode]);
     }
 
-    public function edit($id, Request $request) {
+    public static function edit($id, Request $request) {
         $title = $request->input('title');
         $content = $request->input('content');
         $first_name = $request->input('first_name');
@@ -80,7 +80,7 @@ class Company extends Model
         return DB::table('company_meta')->where(['company_id' => $id, 'meta_key' => 'postcode'])->update(['meta_value' => $postcode]);
     }
 
-    public function remove($id) {
+    public static function remove($id) {
         return DB::table('companies')
             ->where('id', $id)
             ->delete();

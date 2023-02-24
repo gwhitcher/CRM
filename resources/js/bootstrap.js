@@ -10,7 +10,8 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+import axios from 'axios';
+window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -22,13 +23,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 // import Echo from 'laravel-echo';
 
-// window.Pusher = require('pusher-js');
+// import Pusher from 'pusher-js';
+// window.Pusher = Pusher;
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
+//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
+//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
+//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
+//     enabledTransports: ['ws', 'wss'],
 // });
 
 /** jquery **/
@@ -95,4 +101,29 @@ $(document).on("click", ".deleteRowNew", function(e) {
     e.preventDefault();
     let id = $(this).data('id');
     $('#line_item_new_row_' + id).remove();
+});
+
+//Flash message disappear
+$(document).ready(function($){
+    if('.fadeout-message'){
+        setTimeout(function() {
+            $('.mainAlert').slideUp(1200);
+        }, 5000);
+    }
+});
+
+/* Delete Confirm */
+$(document).ready(function(){
+    $(".delete, .confirm").on("click", null, function(){
+        return confirm("Are you sure?");
+    });
+});
+
+//bootstrap tables
+$(function() {
+    $('#table').bootstrapTable();
+
+    $(".delete, .confirm").on("click", null, function(){
+        return confirm("Are you sure?");
+    });
 });

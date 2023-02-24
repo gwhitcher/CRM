@@ -12,19 +12,19 @@ class CompanyNote extends Model
 {
     use HasFactory;
 
-    public function getAll() {
+    public static function getAll() {
         return DB::table('company_notes')->orderBy('title','asc')->get();
     }
 
-    public function view($id) {
+    public static function view($id) {
         return DB::table('company_notes')->where('id','=', $id)->first();
     }
 
-    public function getNotesByCompanyID($id) {
+    public static function getNotesByCompanyID($id) {
         return DB::table('company_notes')->where('company_id','=', $id)->get();
     }
 
-    public function add(Request $request) {
+    public static function add(Request $request) {
         $company_id = $request->input('company_id');
         $title = $request->input('title');
         $content = $request->input('content');
@@ -39,7 +39,7 @@ class CompanyNote extends Model
             ]);
     }
 
-    public function edit($id, Request $request) {
+    public static function edit($id, Request $request) {
         $company_id = $request->input('company_id');
         $title = $request->input('title');
         $content = $request->input('content');
@@ -54,7 +54,7 @@ class CompanyNote extends Model
             ]);
     }
 
-    public function remove($id) {
+    public static function remove($id) {
         return DB::table('company_notes')
             ->where('id', $id)
             ->delete();

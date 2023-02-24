@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class InvoiceLineItem extends Model
 {
-    public function getAll() {
+    public static function getAll() {
         return DB::table('invoice_line_items')->orderBy('title','asc')->get();
     }
 
-    public function view($id) {
+    public static function view($id) {
         return DB::table('invoice_line_items')->where('id','=', $id)->first();
     }
 

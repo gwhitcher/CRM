@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\DB;
 
 class Invoice extends Model
 {
-    public function getAll() {
+    public static function getAll() {
         return DB::table('invoices')->orderBy('id','desc')->get();
     }
 
-    public function view($id) {
+    public static function view($id) {
         return DB::table('invoices')->where('id','=', $id)->first();
     }
 
-    public function getInvoicesByCompanyID($id) {
+    public static function getInvoicesByCompanyID($id) {
         return DB::table('invoices')->where('company_id','=', $id)->get();
     }
 
@@ -98,7 +98,7 @@ class Invoice extends Model
         return '';
     }
 
-    public function remove($id) {
+    public static function remove($id) {
         return DB::table('invoices')
             ->where('id', $id)
             ->delete();
