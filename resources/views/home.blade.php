@@ -26,7 +26,7 @@
                                         <td>{{ $latestCompany->id }}</td>
                                         <td>{{ $latestCompany->title }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-view', $latestCompany->id) }}">View</a>
+                                            <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-view', $latestCompany->id) }}">View</a>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -55,7 +55,7 @@
                                         <td>{{ $pastDueInvoice->title }}</td>
                                         <td>{{ $pastDueInvoice->due_date }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('invoice-view', $pastDueInvoice->id) }}">View</a>
+                                            <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-view', $pastDueInvoice->id) }}">View</a>
                                         </td>
                                         <td></td>
                                     </tr>

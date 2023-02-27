@@ -11,7 +11,7 @@
                                 {{ __($company->title) }}
                             </div>
                             <div class="col-sm-6 text-center text-md-end">
-                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-edit', $company->id) }}">Edit</a>
+                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-edit', $company->id) }}">Edit</a>
                                 <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('company-delete', $company->id) }}">Delete</a>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                                                 Invoices
                                             </div>
                                             <div class="col-sm-6 text-center text-md-end">
-                                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('invoice-add', [ 'company_id' => $company->id ]) }}">Add Invoice</a>
+                                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-add', [ 'company_id' => $company->id ]) }}">Add Invoice</a>
                                             </div>
                                         </div>
                                     </div>
@@ -54,8 +54,8 @@
                                                     <td>{{ $invoice->due_date }}</td>
                                                     <td>{{ strtoupper($invoice->status) }}</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('invoice-view', $invoice->id) }}">View</a>
-                                                        <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('invoice-edit', $invoice->id) }}">Edit</a>
+                                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-view', $invoice->id) }}">View</a>
+                                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-edit', $invoice->id) }}">Edit</a>
                                                         <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('invoice-delete', $invoice->id) }}">Delete</a>
                                                     </td>
                                                 </tr>
@@ -72,7 +72,7 @@
                                                 Links
                                             </div>
                                             <div class="col-sm-6 text-center text-md-end">
-                                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-links-add', [ 'company_id' => $company->id ]) }}">Add Link</a>
+                                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-links-add', [ 'company_id' => $company->id ]) }}">Add Link</a>
                                             </div>
                                         </div>
                                     </div>
@@ -92,8 +92,8 @@
                                                     <td>{{ $link->id }}</td>
                                                     <td>{{ $link->title }}</td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-dark text-white ts-9" href="{{ $link->content }}" target="_blank">View</a>
-                                                        <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-links-edit', $link->id) }}">Edit</a>
+                                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ $link->content }}" target="_blank">View</a>
+                                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-links-edit', $link->id) }}">Edit</a>
                                                         <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('company-links-delete', $link->id) }}">Delete</a>
                                                     </td>
                                                 </tr>
@@ -110,7 +110,7 @@
                                                 Notes
                                             </div>
                                             <div class="col-sm-6 text-center text-md-end">
-                                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-notes-add', [ 'company_id' => $company->id ]) }}">Add Note</a>
+                                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-notes-add', [ 'company_id' => $company->id ]) }}">Add Note</a>
                                             </div>
                                         </div>
                                     </div>
@@ -132,10 +132,10 @@
                                                 <td>{{ $note->title }}</td>
                                                 <td>{{ $note->updated_at }}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-dark text-white ts-9" data-bs-toggle="modal" data-bs-target="#noteModal{{ $note->id }}">
+                                                    <button type="button" class="btn btn-sm btn-secondary text-white ts-9" data-bs-toggle="modal" data-bs-target="#noteModal{{ $note->id }}">
                                                         View
                                                     </button>
-                                                    <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-notes-edit', $note->id) }}">Edit</a>
+                                                    <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-notes-edit', $note->id) }}">Edit</a>
                                                     <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('company-notes-delete', $note->id) }}">Delete</a>
                                                 </td>
                                             </tr>

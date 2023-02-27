@@ -11,8 +11,8 @@
                                 {{ __($invoice->title) }}
                             </div>
                             <div class="col-sm-6 text-center text-md-end">
-                                <a class="btn btn-sm btn-dark text-white" href="{{ route('invoice-print', $invoice->id) }}">Print</a>
-                                <a class="btn btn-sm btn-dark text-white" href="{{ route('invoice-edit', $invoice->id) }}">Edit</a>
+                                <a class="btn btn-sm btn-secondary text-white" href="{{ route('invoice-print', $invoice->id) }}">Print</a>
+                                <a class="btn btn-sm btn-secondary text-white" href="{{ route('invoice-edit', $invoice->id) }}">Edit</a>
                                 <a class="btn btn-sm btn-danger text-white confirm" href="{{ route('invoice-delete', $invoice->id) }}">Delete</a>
                             </div>
                         </div>

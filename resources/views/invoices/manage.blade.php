@@ -97,7 +97,7 @@
 
                             <div class="form-group row mt-3">
                                 <div class="col-md-12 text-end">
-                                    <input type="submit" name="submit" id="submit" class="btn btn-sm btn-dark" value="Submit" />
+                                    <input type="submit" name="submit" id="submit" class="btn btn-sm btn-secondary" value="Submit" />
                                 </div>
                             </div>
 

@@ -11,7 +11,7 @@
                                 {{ __('Companies') }}
                             </div>
                             <div class="col-sm-6 text-center text-md-end">
-                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-add') }}">Add</a>
+                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-add') }}">Add</a>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <td>{{ $company->id }}</td>
                                 <td>{{ $company->title }}</td>
                                 <td>
-                                    <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('company-view', $company->id) }}">View</a>
+                                    <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-view', $company->id) }}">View</a>
                                 </td>
                             </tr>
                             @endforeach

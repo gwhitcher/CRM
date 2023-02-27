@@ -11,7 +11,7 @@
                                 {{ __('Users') }}
                             </div>
                             <div class="col-sm-6 text-center text-md-end">
-                                <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('users-add') }}">Add</a>
+                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('users-add') }}">Add</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-dark text-white ts-9" href="{{ route('users-edit', $user->id) }}">Edit</a>
+                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('users-edit', $user->id) }}">Edit</a>
                                         <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('users-delete', $user->id) }}">Delete</a>
                                     </td>
                                 </tr>
