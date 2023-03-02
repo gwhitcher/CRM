@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class Invoice extends Model
 {
@@ -34,21 +37,22 @@ class Invoice extends Model
         $content = $request->input('content');
         $due_date = $request->input('due_date');
         $status = $request->input('status');
-
-        $invoice_id = DB::table('invoices')
-            ->insertGetId([
-                'company_id' => $company_id,
-                'title' => $title,
-                'content' => $content,
-                'due_date' => $due_date,
-                'status' => $status
-            ]);
-
         $line_items = $request->input('line_items');
-        foreach($line_items as $line_item) {
-            InvoiceLineItem::add($invoice_id, $line_item);
-        }
+        if(!empty($line_items)) {
+            $invoice_id = DB::table('invoices')
+                ->insertGetId([
+                    'company_id' => $company_id,
+                    'title' => $title,
+                    'content' => $content,
+                    'due_date' => $due_date,
+                    'status' => $status
+                ]);
 
+
+            foreach($line_items as $line_item) {
+                InvoiceLineItem::add($invoice_id, $line_item);
+            }
+        }
         return '';
     }
 
@@ -58,46 +62,45 @@ class Invoice extends Model
         $content = $request->input('content');
         $due_date = $request->input('due_date');
         $status = $request->input('status');
-        DB::table('invoices')
-            ->where('id', $id)
-            ->update([
-                'company_id' => $company_id,
-                'title' => $title,
-                'content' => $content,
-                'due_date' => $due_date,
-                'status' => $status
-            ]);
-
-
         $line_items = $request->input('line_items');
+        if(!empty($line_items)) {
+            DB::table('invoices')
+                ->where('id', $id)
+                ->update([
+                    'company_id' => $company_id,
+                    'title' => $title,
+                    'content' => $content,
+                    'due_date' => $due_date,
+                    'status' => $status
+                ]);
 
-        $line_item_id_array = [];
-        foreach($line_items as $key => $line_item) {
-            $line_item_id_array[] = $key;
-        }
-
-        $old_line_item_id_array = [];
-        $old_line_items = InvoiceLineItem::lineItemsByInvoiceID($id);
-        foreach($old_line_items as $old_line_item) {
-            $old_line_item_id_array[] = $old_line_item->id;
-        }
-        foreach($old_line_item_id_array as $old_line_item_id_array_item) {
-            if(!in_array($old_line_item_id_array_item, $line_item_id_array)) {
-                InvoiceLineItem::remove($old_line_item_id_array_item);
+            $line_item_id_array = [];
+            foreach($line_items as $key => $line_item) {
+                $line_item_id_array[] = $key;
             }
-        }
 
-        foreach($line_items as $key => $line_item) {
-            if(str_contains($key, 'new')) {
-                InvoiceLineItem::add($id, $line_item);
-            } else {
-                InvoiceLineItem::edit($id, $key, $line_item);
+            $old_line_item_id_array = [];
+            $old_line_items = InvoiceLineItem::lineItemsByInvoiceID($id);
+            foreach($old_line_items as $old_line_item) {
+                $old_line_item_id_array[] = $old_line_item->id;
             }
-        }
+            foreach($old_line_item_id_array as $old_line_item_id_array_item) {
+                if(!in_array($old_line_item_id_array_item, $line_item_id_array)) {
+                    InvoiceLineItem::remove($old_line_item_id_array_item);
+                }
+            }
 
+            foreach($line_items as $key => $line_item) {
+                if(str_contains($key, 'new')) {
+                    InvoiceLineItem::add($id, $line_item);
+                } else {
+                    InvoiceLineItem::edit($id, $key, $line_item);
+                }
+            }
+
+        }
         return '';
     }
-
     public static function remove($id) {
         return DB::table('invoices')
             ->where('id', $id)

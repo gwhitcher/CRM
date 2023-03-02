@@ -36,6 +36,7 @@ Route::any('/invoices/add', [App\Http\Controllers\InvoicesController::class, 'ad
 Route::any('/invoices/edit/{id}', [App\Http\Controllers\InvoicesController::class, 'edit'])->name('invoice-edit');
 Route::any('/invoices/delete/{id}', [App\Http\Controllers\InvoicesController::class, 'delete'])->name('invoice-delete');
 Route::any('/invoices/print/{id}', [App\Http\Controllers\InvoicesController::class, 'print'])->name('invoice-print');
+Route::any('/invoices/email/{id}', [App\Http\Controllers\InvoicesController::class, 'email'])->name('invoice-email');
 Route::get('/invoices/{id}', [App\Http\Controllers\InvoicesController::class, 'view'])->name('invoice-view');
 
 Route::get('/users', [App\Http\Controllers\UsersController::class, 'index'])->name('users');

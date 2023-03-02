@@ -6,7 +6,10 @@ use App\Models\Company;
 use App\Models\CompanyMeta;
 use App\Models\Invoice;
 use App\Models\InvoiceLineItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
 {
@@ -17,7 +20,7 @@ class InvoicesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['print']);
     }
 
     /**
@@ -45,6 +48,7 @@ class InvoicesController extends Controller
     public function print($id) {
         $invoice = Invoice::view($id);
         $line_items = InvoiceLineItem::lineItemsByInvoiceID($id);
+        $company = Company::view($invoice->company_id);
         $first_name = CompanyMeta::getMeta($invoice->company_id, 'first_name');
         $last_name = CompanyMeta::getMeta($invoice->company_id, 'last_name');
         $email = CompanyMeta::getMeta($invoice->company_id, 'email');
@@ -67,6 +71,7 @@ class InvoicesController extends Controller
                 'city' => $city,
                 'state' => $state,
                 'postcode' => $postcode,
+                'company' => $company
             ]);
     }
 
@@ -124,6 +129,79 @@ class InvoicesController extends Controller
         }
 
         $request->session()->flash('alert-message', 'Invoice deleted!');
+        $request->session()->flash('alert-type', 'success');
+
+        return redirect(route('invoices'));
+    }
+
+    public static function email($id, Request $request) {
+        //PDF
+        $body = $request->input('body');
+        if(empty($body)) {
+            $body = env('INVOICE_DEFAULT_BODY');
+        }
+        $invoice = Invoice::view($id);
+        $line_items = InvoiceLineItem::lineItemsByInvoiceID($id);
+        $company = Company::view($invoice->company_id);
+        $first_name = CompanyMeta::getMeta($invoice->company_id, 'first_name');
+        $last_name = CompanyMeta::getMeta($invoice->company_id, 'last_name');
+        $email = CompanyMeta::getMeta($invoice->company_id, 'email');
+        $phone = CompanyMeta::getMeta($invoice->company_id, 'phone');
+        $address = CompanyMeta::getMeta($invoice->company_id, 'address');
+        $address2 = CompanyMeta::getMeta($invoice->company_id, 'address2');
+        $city = CompanyMeta::getMeta($invoice->company_id, 'city');
+        $state = CompanyMeta::getMeta($invoice->company_id, 'state');
+        $postcode = CompanyMeta::getMeta($invoice->company_id, 'postcode');
+        $pdf = PDF::loadView('invoices.print', [
+            'invoice' => $invoice,
+            'line_items' => $line_items,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'address2' => $address2,
+            'city' => $city,
+            'state' => $state,
+            'postcode' => $postcode,
+            'company' => $company
+        ])->setOption('defaultFont', 'sans-serif');
+        $output = $pdf->output();
+        $file = 'invoices/invoice_' . $id . '.pdf';
+        Storage::put($file, $output);
+
+        $emailData = [
+            'id' => $id,
+            'invoice' => $invoice,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'address2' => $address2,
+            'city' => $city,
+            'state' => $state,
+            'postcode' => $postcode,
+            'company' => $company->title,
+            'file' => $file,
+            'body' => $body
+        ];
+
+        //send email
+        Mail::send('invoices.email', ["emailData" => $emailData], function($message) use ($emailData) {
+            $message->to($emailData['email'], $emailData['company'])
+                ->subject('Invoice #'.$emailData['id'], $emailData['id'])
+                ->replyTo(env('ADMIN_EMAIL'), env('ADMIN_COMPANY'))
+                ->bcc(env('ADMIN_EMAIL'), env('ADMIN_COMPANY'))
+                ->from(env('ADMIN_EMAIL'), env('ADMIN_COMPANY'))
+                ->attach(storage_path('app/'.$emailData['file']));
+            ;
+        });
+
+        //delete invoice
+        Storage::delete($file);
+
+        $request->session()->flash('alert-message', 'Invoice sent!');
         $request->session()->flash('alert-type', 'success');
 
         return redirect(route('invoices'));

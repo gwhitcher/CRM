@@ -149,7 +149,7 @@
                                                         <div class="modal-body">
                                                             <span class="badge bg-secondary">Created: {{ $note->created_at }}</span>
                                                             <span class="badge bg-secondary">Updated: {{ $note->updated_at }}</span>
-                                                            <div>{{ $note->content }}</div>
+                                                            <div>{!! nl2br(e($note->content)) !!}</div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
