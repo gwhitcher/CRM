@@ -68,7 +68,10 @@ class CompaniesController extends Controller
     public function add(Request $request) {
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'title' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required'
             ]);
 
             Company::add($request);
@@ -95,7 +98,10 @@ class CompaniesController extends Controller
         $postcode = CompanyMeta::getMeta($id, 'postcode');
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'title' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required'
             ]);
 
             Company::edit($id, $request);

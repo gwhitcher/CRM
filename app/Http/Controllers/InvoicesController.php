@@ -79,7 +79,11 @@ class InvoicesController extends Controller
         $companies = Company::getAll();
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'due_date' => 'required',
+                'status' => 'required',
+                'line_items' => 'required'
             ]);
 
             Invoice::add($request);
@@ -102,7 +106,11 @@ class InvoicesController extends Controller
         $companies = Company::getAll();
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'due_date' => 'required',
+                'status' => 'required',
+                'line_items' => 'required'
             ]);
 
             Invoice::edit($id, $request);

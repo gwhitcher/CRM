@@ -69,19 +69,19 @@
                                                 </a>
                                             </div>
                                             <div class="col-sm-3">
-                                                <label for="line_items[{{ $line_item->id }}][title]">Title</label>
-                                                <input class="form-control" type="text" value="{{ $line_item->title }}" name="line_items[{{ $line_item->id }}][title]" />
+                                                <label for="line_items[{{ $line_item->id }}][title]">Title<span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" value="{{ $line_item->title }}" name="line_items[{{ $line_item->id }}][title]" required />
                                             </div>
                                             <div class="col-sm-3">
                                                 <label for="line_items[{{ $line_item->id }}][content]">Content</label>
                                                 <input class="form-control" type="text" value="{{ $line_item->content }}" name="line_items[{{ $line_item->id }}][content]" />
                                             </div>
                                             <div class="col-sm-3">
-                                                <label for="line_items[{{ $line_item->id }}][quantity]">Quantity</label>
-                                                <input class="form-control" type="text" value="{{ $line_item->quantity }}" name="line_items[{{ $line_item->id }}][quantity]" />
+                                                <label for="line_items[{{ $line_item->id }}][quantity]">Quantity<span class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" value="{{ $line_item->quantity }}" name="line_items[{{ $line_item->id }}][quantity]" required />
                                             </div>
                                             <div class="col-sm-3">
-                                                <label for="line_items[{{ $line_item->id }}][price]">Price</label>
+                                                <label for="line_items[{{ $line_item->id }}][price]">Price<span class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" value="{{ $line_item->price }}" name="line_items[{{ $line_item->id }}][price]" />
                                             </div>
                                         </div>

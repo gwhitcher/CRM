@@ -22,7 +22,9 @@ class CompanyNotesController extends Controller
         $companies = Company::getAll();
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
 
             CompanyNote::add($request);
@@ -43,7 +45,9 @@ class CompanyNotesController extends Controller
         $note = CompanyNote::view($id);
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
 
             CompanyNote::edit($id, $request);

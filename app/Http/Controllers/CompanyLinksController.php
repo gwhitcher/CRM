@@ -22,7 +22,9 @@ class CompanyLinksController extends Controller
         $companies = Company::getAll();
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
 
             CompanyLink::add($request);
@@ -44,7 +46,9 @@ class CompanyLinksController extends Controller
         $link = CompanyLink::view($id);
         if(!empty($request->input('submit'))) {
             $request->validate([
-                'title' => 'required'
+                'company_id' => 'required',
+                'title' => 'required',
+                'content' => 'required',
             ]);
 
             CompanyLink::edit($id, $request);

@@ -61,8 +61,8 @@ $(document).ready(function() {
 
         //title
         html += '<div class="col-sm-3">';
-        html += '<label for="line_items[new_' + int + '][title]">Title</label>';
-        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][title]" />';
+        html += '<label for="line_items[new_' + int + '][title]">Title<span class="text-danger">*</span></label>';
+        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][title]" required />';
         html += '</div>';
 
         //content
@@ -73,14 +73,14 @@ $(document).ready(function() {
 
         //quantity
         html += '<div class="col-sm-3">';
-        html += '<label for="line_items[new_' + int + '][quantity]">Quantity</label>';
-        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][quantity]" />';
+        html += '<label for="line_items[new_' + int + '][quantity]">Quantity<span class="text-danger">*</span></label>';
+        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][quantity]" required />';
         html += '</div>';
 
         //price
         html += '<div class="col-sm-3">';
-        html += '<label for="line_items[new_' + int + '][price]">Price</label>';
-        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][price]" />';
+        html += '<label for="line_items[new_' + int + '][price]">Price<span class="text-danger">*</span></label>';
+        html += '<input class="form-control" type="text" value="" name="line_items[new_' + int + '][price]" required />';
         html += '</div>';
 
         html += '</div>';

@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group row mb-3">
-                                <label for="content" class="col-md-2 col-form-label text-md-right">{{ __('Content') }}<span class="text-danger">*</span></label>
+                                <label for="content" class="col-md-2 col-form-label text-md-right">{{ __('URL') }}<span class="text-danger">*</span></label>
                                 <div class="col-md-10">
                                     <textarea class="form-control" name="content" id="content" required>@if($edit) {{
     __($company->content)
