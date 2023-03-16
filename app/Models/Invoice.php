@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class Invoice extends Model
 {
@@ -38,6 +36,7 @@ class Invoice extends Model
         $due_date = $request->input('due_date');
         $status = $request->input('status');
         $line_items = $request->input('line_items');
+        $current_date_time = Carbon::now()->toDateTimeString();
         if(!empty($line_items)) {
             $invoice_id = DB::table('invoices')
                 ->insertGetId([
@@ -45,7 +44,9 @@ class Invoice extends Model
                     'title' => $title,
                     'content' => $content,
                     'due_date' => $due_date,
-                    'status' => $status
+                    'status' => $status,
+                    'created_at' => $current_date_time,
+                    'updated_at' => $current_date_time
                 ]);
 
 
@@ -63,6 +64,7 @@ class Invoice extends Model
         $due_date = $request->input('due_date');
         $status = $request->input('status');
         $line_items = $request->input('line_items');
+        $current_date_time = Carbon::now()->toDateTimeString();
         if(!empty($line_items)) {
             DB::table('invoices')
                 ->where('id', $id)
@@ -71,7 +73,8 @@ class Invoice extends Model
                     'title' => $title,
                     'content' => $content,
                     'due_date' => $due_date,
-                    'status' => $status
+                    'status' => $status,
+                    'updated_at' => $current_date_time
                 ]);
 
             $line_item_id_array = [];

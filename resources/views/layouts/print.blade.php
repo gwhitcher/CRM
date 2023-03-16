@@ -35,6 +35,9 @@
         }
         .table {width: 100%;}
         .table th {text-align: left;}
+        .table td, .table th {
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>

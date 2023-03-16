@@ -18,7 +18,7 @@ class CreateInvoiceLineItemsTable extends Migration
             $table->bigInteger('invoice_id');
             $table->string('title');
             $table->longText('content')->nullable();
-            $table->integer('quantity');
+            $table->decimal('quantity');
             $table->decimal('price');
             $table->timestamps();
         });

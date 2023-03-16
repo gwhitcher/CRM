@@ -15,8 +15,8 @@
         <div class="row">
             <div class="col fw-bold">
                 <div class="">Invoice Number: {{ $invoice->id }}</div>
-                <div class="">Date Issued: {{ $invoice->created_at }}</div>
-                <div class="">Date Due: {{ $invoice->created_at }}</div>
+                <div class="">Date Issued: {{ date('F jS Y', strtotime($invoice->created_at)) }}</div>
+                <div class="">Date Due: {{ date('F jS Y', strtotime($invoice->due_date)) }}</div>
             </div>
             <div class="col text-end">
                 {{ $invoice->content }}
@@ -107,7 +107,10 @@
                     @endphp
                     <tr>
                         <td>{{ $i }}</td>
-                        <td>{{ $line_item->title }}</td>
+                        <td>
+                            <div class="fw-bold">{{ $line_item->title }}</div>
+                            <div class="fst-italic">{{ $line_item->content }}</div>
+                        </td>
                         <td>{{ $line_item->quantity }}</td>
                         <td>${{ number_format($line_item->price, 2) }}</td>
                         <td>${{ number_format($price, 2) }}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -24,13 +25,16 @@ class InvoiceLineItem extends Model
         $content = $line_item['content'];
         $quantity = $line_item['quantity'];
         $price = $line_item['price'];
+        $current_date_time = Carbon::now()->toDateTimeString();
         return DB::table('invoice_line_items')
             ->insert([
                 'invoice_id' => $invoice_id,
                 'title' => $title,
                 'content' => $content,
                 'quantity' => $quantity,
-                'price' => $price
+                'price' => $price,
+                'created_at' => $current_date_time,
+                'updated_at' => $current_date_time
             ]);
     }
 
@@ -39,6 +43,7 @@ class InvoiceLineItem extends Model
         $content = $line_item['content'];
         $quantity = $line_item['quantity'];
         $price = $line_item['price'];
+        $current_date_time = Carbon::now()->toDateTimeString();
         return DB::table('invoice_line_items')
             ->where('id', $id)
             ->update([
@@ -46,7 +51,8 @@ class InvoiceLineItem extends Model
                 'title' => $title,
                 'content' => $content,
                 'quantity' => $quantity,
-                'price' => $price
+                'price' => $price,
+                'updated_at' => $current_date_time
             ]);
     }
 
