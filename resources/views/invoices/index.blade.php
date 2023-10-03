@@ -32,12 +32,23 @@
                                 <th scope="col" data-field="company" data-sortable="true">Company</th>
                                 <th scope="col" data-field="name" data-sortable="true">Name</th>
                                 <th scope="col" data-field="due_date" data-sortable="true">Due Date</th>
+                                <th scope="col" data-field="total" data-sortable="true">Total</th>
                                 <th scope="col" data-field="status" data-sortable="true">Status</th>
                                 <th scope="col">View</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($invoices as $invoice)
+                                @php
+                                    $total = 0;
+                                    $line_items = \App\Models\InvoiceLineItem::lineItemsByInvoiceID($invoice->id);
+                                @endphp
+                                @foreach($line_items as $line_item)
+                                    @php
+                                        $price = $line_item->quantity * $line_item->price;
+                                        $total += $price;
+                                    @endphp
+                                @endforeach
                                 <tr>
                                     <td>{{ $invoice->id }}</td>
                                     <td>
@@ -48,6 +59,7 @@
                                     </td>
                                     <td>{{ $invoice->title }}</td>
                                     <td>{{ date('F jS, Y', strtotime($invoice->due_date)) }}</td>
+                                    <td>${{ number_format($total, 2) }}</td>
                                     <td>
                                         @php
                                         if(strtoupper($invoice->status) == 'COMPLETED') {
