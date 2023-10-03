@@ -38,10 +38,12 @@ class InvoicesController extends Controller
     public function view($id) {
         $invoice = Invoice::view($id);
         $line_items = InvoiceLineItem::lineItemsByInvoiceID($id);
+        $company = Company::view($invoice->company_id);
         return view('invoices.view')
             ->with([
                 'invoice' => $invoice,
                 'line_items' => $line_items,
+                'company' => $company
             ]);
     }
 

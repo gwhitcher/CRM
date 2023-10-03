@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-sm-6 text-center text-md-start">
-                                {{ __($invoice->title) }}
+                                {{ $company->title }} - {{ __($invoice->title) }}
                             </div>
                             <div class="col-sm-6 text-center text-md-end">
                                 <a class="btn btn-sm btn-secondary text-white" href="{{ route('invoice-print', $invoice->id) }}">Print</a>

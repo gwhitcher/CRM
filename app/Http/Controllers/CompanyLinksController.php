@@ -44,6 +44,7 @@ class CompanyLinksController extends Controller
     public function edit($id, Request $request) {
         $companies = Company::getAll();
         $link = CompanyLink::view($id);
+        $company = Company::view($link->company_id);
         if(!empty($request->input('submit'))) {
             $request->validate([
                 'company_id' => 'required',
@@ -62,7 +63,8 @@ class CompanyLinksController extends Controller
             ->with([
                 'edit' => true,
                 'link' => $link,
-                'companies' => $companies
+                'companies' => $companies,
+                'company' => $company
             ]);
     }
 

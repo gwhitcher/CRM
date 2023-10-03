@@ -17,7 +17,7 @@
                                 <div class="col-md-10">
                                     <select class="form-control" name="company_id" id="company_id" required>
                                         @foreach($companies as $company)
-                                            <option value="{{ $company->id }}" @if($edit && $company->id == $invoice->company_id) selected @endif @if(isset($_GET['company_id']) && $_GET['company_id'] == $company->id) selected @endif>{{ $company->title }}</option>
+                                            <option value="{{ $company->id }}" @if($edit && $company->id == $note->company_id) selected @endif @if(isset($_GET['company_id']) && $_GET['company_id'] == $company->id) selected @endif>{{ $company->title }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -27,7 +27,7 @@
                                 <label for="title" class="col-md-2 col-form-label text-md-right">{{ __('Title') }}<span class="text-danger">*</span></label>
                                 <div class="col-md-10">
                                     <input type="text" class="form-control" name="title" id="title" value="@if($edit) {{
-    __($company->title)
+    __($note->title)
  }} @endif" required />
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                 <label for="content" class="col-md-2 col-form-label text-md-right">{{ __('Content') }}<span class="text-danger">*</span></label>
                                 <div class="col-md-10">
                                     <textarea class="form-control" name="content" id="content" required>@if($edit) {{
-    __($company->content)
+    __($note->content)
  }} @endif</textarea>
                                 </div>
                             </div>

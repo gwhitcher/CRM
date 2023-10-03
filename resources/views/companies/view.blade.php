@@ -51,7 +51,7 @@
                                                 <tr>
                                                     <td>{{ $invoice->id }}</td>
                                                     <td>{{ $invoice->title }}</td>
-                                                    <td>{{ $invoice->due_date }}</td>
+                                                    <td>{{ date('F jS, Y', strtotime($invoice->due_date)) }}</td>
                                                     <td>{{ strtoupper($invoice->status) }}</td>
                                                     <td>
                                                         <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-view', $invoice->id) }}">View</a>
@@ -130,7 +130,7 @@
                                             <tr>
                                                 <td>{{ $note->id }}</td>
                                                 <td>{{ $note->title }}</td>
-                                                <td>{{ $note->updated_at }}</td>
+                                                <td>{{ date('F jS, Y', strtotime($note->updated_at)) }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-secondary text-white ts-9" data-bs-toggle="modal" data-bs-target="#noteModal{{ $note->id }}">
                                                         View

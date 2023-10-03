@@ -29,6 +29,7 @@
                             <thead>
                             <tr>
                                 <th scope="col" data-field="id" data-sortable="true">#</th>
+                                <th scope="col" data-field="company" data-sortable="true">Company</th>
                                 <th scope="col" data-field="name" data-sortable="true">Name</th>
                                 <th scope="col" data-field="due_date" data-sortable="true">Due Date</th>
                                 <th scope="col" data-field="status" data-sortable="true">Status</th>
@@ -39,9 +40,26 @@
                             @foreach($invoices as $invoice)
                                 <tr>
                                     <td>{{ $invoice->id }}</td>
+                                    <td>
+                                        @php
+                                            $company = \App\Models\Company::view($invoice->company_id);
+                                        @endphp
+                                        {{ $company->title }}
+                                    </td>
                                     <td>{{ $invoice->title }}</td>
-                                    <td>{{ $invoice->due_date }}</td>
-                                    <td>{{ strtoupper($invoice->status) }}</td>
+                                    <td>{{ date('F jS, Y', strtotime($invoice->due_date)) }}</td>
+                                    <td>
+                                        @php
+                                        if(strtoupper($invoice->status) == 'COMPLETED') {
+                                            $class = 'btn-success';
+                                        } else {
+                                            $class = 'btn-warning';
+                                        }
+                                        @endphp
+                                        <div class="btn btn-sm {{ $class }} text-white">
+                                            {{ strtoupper($invoice->status) }}
+                                        </div>
+                                    </td>
                                     <td>
                                         <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-view', $invoice->id) }}">View</a>
                                     </td>

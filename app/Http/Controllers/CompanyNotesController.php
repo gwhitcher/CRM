@@ -43,6 +43,8 @@ class CompanyNotesController extends Controller
 
     public function edit($id, Request $request) {
         $note = CompanyNote::view($id);
+        $company = Company::view($note->company_id);
+        $companies = Company::getAll();
         if(!empty($request->input('submit'))) {
             $request->validate([
                 'company_id' => 'required',
@@ -60,7 +62,9 @@ class CompanyNotesController extends Controller
         return view('companies.notes.manage')
             ->with([
                 'edit' => true,
-                'note' => $note
+                'note' => $note,
+                'companies' => $companies,
+                'company' => $company
             ]);
     }
 

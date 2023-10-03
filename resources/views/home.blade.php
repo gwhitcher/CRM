@@ -44,6 +44,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Title</th>
+                                        <th>Company</th>
                                         <th>Due Date</th>
                                         <th>View</th>
                                     </tr>
@@ -53,7 +54,13 @@
                                     <tr>
                                         <td>{{ $pastDueInvoice->id }}</td>
                                         <td>{{ $pastDueInvoice->title }}</td>
-                                        <td>{{ $pastDueInvoice->due_date }}</td>
+                                        <td>
+                                            @php
+                                            $company = \App\Models\Company::view($pastDueInvoice->company_id);
+                                            @endphp
+                                            {{ $company->title }}
+                                        </td>
+                                        <td>{{ date('F jS, Y', strtotime($pastDueInvoice->due_date)) }}</td>
                                         <td>
                                             <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('invoice-view', $pastDueInvoice->id) }}">View</a>
                                         </td>
