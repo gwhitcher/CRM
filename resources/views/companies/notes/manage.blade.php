@@ -9,7 +9,7 @@
                     <div class="card-header">@if($edit) {{ __('Edit') }} @else {{ __('Add') }} @endif</div>
 
                     <div class="card-body">
-                        <form method="POST" action="@if($edit){{ route('company-notes-edit', $company->id) }}@else{{ route('company-notes-add') }}@endif">
+                        <form method="POST" action="@if($edit){{ route('company-notes-edit', $note->id) }}@else{{ route('company-notes-add') }}@endif">
                             @csrf
 
                             <div class="form-group row mb-3">
