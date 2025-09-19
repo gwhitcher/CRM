@@ -25,6 +25,10 @@ Route::any('/companies/notes/add', [App\Http\Controllers\CompanyNotesController:
 Route::any('/companies/notes/edit/{id}', [App\Http\Controllers\CompanyNotesController::class, 'edit'])->name('company-notes-edit');
 Route::any('/companies/notes/delete/{id}', [App\Http\Controllers\CompanyNotesController::class, 'delete'])->name('company-notes-delete');
 
+Route::any('/companies/passwords/add', [App\Http\Controllers\CompanyPasswordsController::class, 'add'])->name('company-passwords-add');
+Route::any('/companies/passwords/edit/{id}', [App\Http\Controllers\CompanyPasswordsController::class, 'edit'])->name('company-passwords-edit');
+Route::any('/companies/passwords/delete/{id}', [App\Http\Controllers\CompanyPasswordsController::class, 'delete'])->name('company-passwords-delete');
+
 Route::any('/companies/links/add', [App\Http\Controllers\CompanyLinksController::class, 'add'])->name('company-links-add');
 Route::any('/companies/links/edit/{id}', [App\Http\Controllers\CompanyLinksController::class, 'edit'])->name('company-links-edit');
 Route::any('/companies/links/delete/{id}', [App\Http\Controllers\CompanyLinksController::class, 'delete'])->name('company-links-delete');

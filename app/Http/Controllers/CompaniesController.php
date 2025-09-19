@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\CompanyLink;
 use App\Models\CompanyMeta;
+use App\Models\CompanyPassword;
 use App\Models\CompanyNote;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
@@ -47,6 +48,7 @@ class CompaniesController extends Controller
         $invoices = Invoice::getInvoicesByCompanyID($id);
         $notes = CompanyNote::getNotesByCompanyID($id);
         $links = CompanyLink::getLinksByCompanyID($id);
+        $passwords = CompanyPassword::getPasswordsByCompanyID($id);
         return view('companies.view')
             ->with([
                 'company' => $company,
@@ -61,7 +63,8 @@ class CompaniesController extends Controller
                 'postcode' => $postcode,
                 'invoices' => $invoices,
                 'notes' => $notes,
-                'links' => $links
+                'links' => $links,
+                'passwords' => $passwords
             ]);
     }
 

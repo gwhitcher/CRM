@@ -107,6 +107,79 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-sm-6 text-center text-md-start">
+                                                Passwords
+                                            </div>
+                                            <div class="col-sm-6 text-center text-md-end">
+                                                <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-passwords-add', [ 'company_id' => $company->id ]) }}">Add Password</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <table class="table w-100">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Title</th>
+                                                <th>Username</th>
+                                                <th>Updated</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @forelse($passwords as $password)
+                                                <tr>
+                                                    <td>{{ $password->id }}</td>
+                                                    <td>{{ $password->title }}</td>
+                                                    <td>{{ $password->username }}</td>
+                                                    <td>{{ date('F jS, Y', strtotime($password->updated_at)) }}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-sm btn-secondary text-white ts-9" data-bs-toggle="modal" data-bs-target="#passwordModal{{ $password->id }}">
+                                                            View
+                                                        </button>
+                                                        <a class="btn btn-sm btn-secondary text-white ts-9" href="{{ route('company-passwords-edit', $password->id) }}">Edit</a>
+                                                        <a class="btn btn-sm btn-danger text-white ts-9 confirm" href="{{ route('company-passwords-delete', $password->id) }}">Delete</a>
+                                                    </td>
+                                                </tr>
+                                                <div class="modal fade" id="passwordModal{{ $password->id }}" tabindex="-1" aria-labelledby="passwordModal{{ $password->id }}Label" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="passwordModal{{ $password->id }}Label">{{ $password->title }}</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="mb-2">
+                                                                    <span class="badge bg-secondary">Username: {{ $password->username }}</span>
+                                                                </div>
+                                                                <div class="input-group mb-3">
+                                                                    <input type="password" class="form-control password-value" value="{{ $password->password }}" readonly>
+                                                                    <button class="btn btn-outline-secondary toggle-password-visibility" type="button">Show</button>
+                                                                </div>
+                                                                @if(!empty($password->notes))
+                                                                    <div>{!! nl2br(e($password->notes)) !!}</div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="5" class="text-center text-muted">No passwords saved.</td>
+                                                </tr>
+                                            @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card mt-3">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center text-md-start">
                                                 Notes
                                             </div>
                                             <div class="col-sm-6 text-center text-md-end">
@@ -195,4 +268,21 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toggleButtons = document.querySelectorAll('.toggle-password-visibility');
+            toggleButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var input = this.closest('.input-group').querySelector('.password-value');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        this.textContent = 'Hide';
+                    } else {
+                        input.type = 'password';
+                        this.textContent = 'Show';
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
